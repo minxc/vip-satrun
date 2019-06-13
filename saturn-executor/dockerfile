@@ -20,9 +20,9 @@ RUN echo "jar-->"${JAR_FILE}
 EXPOSE 8080
 ENV TZ "Asia/Shanghai"
 ENV LIB_JARS=/apphome/saturn-executor-3.3.1/lib/*:$CLASSPATH
-RUN ["chmod", "+x", "/apphome/saturn-executor-3.3.1/bin/saturn-executor.sh"]
+RUN ["chmod", "+x", "/apphome/run.sh"]
 
-CMD ["/apphome/saturn-executor-3.3.1/bin/saturn-executor.sh",  "start", "-n", "jobcenter.erp.wms",   "-jmx", "8080"]
+CMD ["/apphome/run.sh"]
 
 #ENV jarPath=${JAR_FILE}
 
