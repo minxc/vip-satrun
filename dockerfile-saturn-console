@@ -1,6 +1,5 @@
 FROM openjdk:8u212-jdk
 
-ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV TZ='Asia/Shanghai'
 # Add Tini
