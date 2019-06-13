@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: jobcenter-saturn-console #容器名称, 在一个pod中是唯一的
-          image: harbor.34580.com/erp/jobcenter-saturn-console/jobcenter-saturn-console:10 # Docker镜像名称
+          image: harbor.34580.com/erp/jobcenter-saturn-console/jobcenter-saturn-console:11 # Docker镜像名称
           imagePullPolicy: Always  #镜像拉取策略,Always | Never | IfNotPersent，默认 Always
           # command:
           #   - sleep
@@ -61,10 +61,10 @@ metadata:
   labels:
     app: jobcenter-saturn-console
 spec:
-  type: NodePort
+  # type: NodePort
   ports:
     - port: 8080
-      nodePort: 38888
+      # nodePort: 38888
       targetPort: 8080
       protocol: TCP
       name: http
