@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: jobcenter-saturn-executor #容器名称, 在一个pod中是唯一的
-          image: harbor.34580.com/erp/jobcenter-saturn-executor/jobcenter-saturn-executor:18 # Docker镜像名称
+          image: harbor.34580.com/erp/jobcenter-saturn-executor/jobcenter-saturn-executor:19 # Docker镜像名称
           imagePullPolicy: Always  #镜像拉取策略,Always | Never | IfNotPersent，默认 Always
           # command:
           #   - sleep
