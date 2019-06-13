@@ -1,13 +1,13 @@
 kind: Deployment
 apiVersion: apps/v1beta2
 metadata:
-  name: @{appName}   #唯一
+  name: jobcenter-saturn-executor   #唯一
   namespace: component
 spec:
   replicas: 1
   selector:
     matchLabels: # @1 要匹配的标签,与@2 要保持一致
-      app: @{appName}
+      app: jobcenter-saturn-executor
   strategy:
     rollingUpdate:
       maxSurge: 1      #滚动升级时会先启动1个pod。这个值可以设置为整数和百分比,如果是使用百分比，则使用向上取整 参考 java.lang.Math.ceil
@@ -15,11 +15,11 @@ spec:
   template:
     metadata:
       labels:
-        app: @{appName} # @2 与上面 @1 要保持一致
+        app: jobcenter-saturn-executor # @2 与上面 @1 要保持一致
     spec:
       containers:
-        - name: @{appName} #容器名称, 在一个pod中是唯一的
-          image: @{dockerImageTag} # Docker镜像名称
+        - name: jobcenter-saturn-executor #容器名称, 在一个pod中是唯一的
+          image: harbor.34580.com/erp/jobcenter-saturn-executor/jobcenter-saturn-executor:14 # Docker镜像名称
           imagePullPolicy: Always  #镜像拉取策略,Always | Never | IfNotPersent，默认 Always
           # command:
           #   - sleep
