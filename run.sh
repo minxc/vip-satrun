@@ -4,7 +4,7 @@
 # ./gradlew :bootJar
 
 
-appName='jobcenter_saturn_console'
+appName='jobcenter-saturn-console'
 
 harborServer='harbor.34580.com'
 harborUser='0000516'
@@ -33,6 +33,8 @@ echo 'k8s Replace'
  sed -i 's#@{appName}#'${appName}'#g' k8s.yaml
 #kubectl apply -f k8s.yaml
 
-
+git add .
+git commit -m "m"
+git push origin master
 #//((ParameterizedType)(TypeToken.of(daoClass.getGenericInterfaces()[0]).getType())).getActualTypeArguments()
 # TypeToken.of(UserDao.class).resolveType(type).getType() //type 为 method.getGenericReturnType()
