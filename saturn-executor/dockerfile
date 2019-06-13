@@ -15,8 +15,8 @@ ARG JAR_FILE
 
 #COPY ${JAR_FILE}  .
 
-COPY app .
-COPY saturn-executor-3.3.1 .
+COPY src .
+
 
 
 #COPY build/libs .
