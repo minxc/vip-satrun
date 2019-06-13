@@ -22,7 +22,7 @@ ENV TZ "Asia/Shanghai"
 ENV LIB_JARS=/apphome/saturn-executor-3.3.1/lib/*:$CLASSPATH
 RUN ["chmod", "+x", "/apphome/saturn-executor-3.3.1/bin/saturn-executor.sh"]
 
-CMD ["/apphome/saturn-executor-3.3.1/bin/saturn-executor.sh",  "start", "-n jobcenter.erp.wms",   "-jmx 8080"]
+CMD ["/apphome/saturn-executor-3.3.1/bin/saturn-executor.sh",  "start", "-n", "jobcenter.erp.wms",   "-jmx", "8080"]
 
 #ENV jarPath=${JAR_FILE}
 
