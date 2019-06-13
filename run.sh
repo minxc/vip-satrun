@@ -31,10 +31,15 @@ echo 'k8s Replace'
   # dockerImageTagForK8s= ${dockerImageTag}.replaceAll('/','\\\\/')
  sed -i 's#@{dockerImageTag}#'$dockerImageTag'#g' k8s.yaml
  sed -i 's#@{appName}#'${appName}'#g' k8s.yaml
-#kubectl apply -f k8s.yaml
-
 git add .
 git commit -m "m"
 git push origin master
+echo 'k8s Recover'
+ sed -i 's#'$dockerImageTag'#@{dockerImageTag}#g' k8s.yaml
+ sed -i 's#'${appName}'#@{appName}#g' k8s.yaml
+
+#kubectl apply -f k8s.yaml
+
+
 #//((ParameterizedType)(TypeToken.of(daoClass.getGenericInterfaces()[0]).getType())).getActualTypeArguments()
 # TypeToken.of(UserDao.class).resolveType(type).getType() //type 为 method.getGenericReturnType()
