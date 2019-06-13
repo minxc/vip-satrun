@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# ./gradlew :clean
+# ./gradlew :bootJar
+
+
+appName='jobcenter-saturn-executor'
+
+harborServer='harbor.34580.com'
+harborUser='0000516'
+harborPwd='Windows2000'
+
+jarName=""
+
+#cp  build/libs/ ./
+app_version=`git rev-list --count HEAD`
+
+dockerImageTag=${harborServer}/erp/${appName}/${appName}:${app_version}
+
+echo ${dockerImageTag}
+
+docker build -f dockerfile --build-arg JAR_FILE=${jarName} -t ${dockerImageTag} .
+
+
+     echo 'Docker push'
+docker login -u ${harborUser} -p ${harborPwd} ${harborServer}
+docker push ${dockerImageTag}
+docker logout ${harborServer}
+
+echo 'k8s Replace'
+  # dockerImageTagForK8s= ${dockerImageTag}.replaceAll('/','\\\\/')
+ sed -i 's#@{dockerImageTag}#'$dockerImageTag'#g' k8s.yaml
+ sed -i 's#@{appName}#'${appName}'#g' k8s.yaml
+git add .
+git commit -m "m"
+git push origin master
+echo 'k8s Recover'
+ sed -i 's#'$dockerImageTag'#@{dockerImageTag}#g' k8s.yaml
+ sed -i 's#'${appName}'#@{appName}#g' k8s.yaml
+
+
+
+#//((ParameterizedType)(TypeToken.of(daoClass.getGenericInterfaces()[0]).getType())).getActualTypeArguments()
+# TypeToken.of(UserDao.class).resolveType(type).getType() //type 为 method.getGenericReturnType()
