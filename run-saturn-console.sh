@@ -1,4 +1,4 @@
-java -Dserver.port=9092 \
+java -Dserver.port=9098 \
 -DVIP_SATURN_CONSOLE_CLUSTER=jobcenter01 \
 -DSATURN_CONSOLE_DB_URL=jdbc:mysql://10.1.62.230:3306/saturn \
 -Dauthentication.enabled=true \
