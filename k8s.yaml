@@ -4,7 +4,7 @@ metadata:
   name: jobcenter-saturn-console   #唯一
   namespace: component
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels: # @1 要匹配的标签,与@2 要保持一致
       app: jobcenter-saturn-console
@@ -19,11 +19,11 @@ spec:
     spec:
       containers:
         - name: jobcenter-saturn-console #容器名称, 在一个pod中是唯一的,DNS_LABEL
-          image: harbor.34580.com/erp/jobcenter-saturn-console/jobcenter-saturn-console:2 # Docker镜像名称
+          image: harbor.34580.com/erp/jobcenter-saturn-console/jobcenter-saturn-console:3 # Docker镜像名称
           imagePullPolicy: Always  #镜像拉取策略,Always | Never | IfNotPersent，默认 Always
-#          command:
-#            - sleep
-#            - "6000"
+         command:
+           - sleep
+           - "6000"
           ports:
             - name: port1
               containerPort: 8080
