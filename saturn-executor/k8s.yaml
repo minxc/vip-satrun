@@ -19,11 +19,16 @@ spec:
     spec:
       containers:
         - name: jobcenter-saturn-executor #容器名称, 在一个pod中是唯一的
-          image: harbor.34580.com/erp/jobcenter-saturn-executor/jobcenter-saturn-executor:20 # Docker镜像名称
+          image: harbor.34580.com/erp/jobcenter-saturn-executor/jobcenter-saturn-executor:21 # Docker镜像名称
           imagePullPolicy: Always  #镜像拉取策略,Always | Never | IfNotPersent，默认 Always
           # command:
           #   - sleep
           #   - "6000"
+          volumeMounts:
+
+          - mountPath: /apps
+            name: test-volume
+
           ports:
             - name: port1
               containerPort: 8080
@@ -42,5 +47,10 @@ spec:
 
             - name: SPRING_PROFILES_ACTIVE
               value: pro
+
+      volumes:
+        - name: test-volume
+          hostPath:
+            path: /apps2
 
 
