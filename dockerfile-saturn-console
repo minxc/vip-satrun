@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-oracle
+FROM openjdk:8-jdk-oracle
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
