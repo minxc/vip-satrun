@@ -25,10 +25,9 @@ EXPOSE 8080
 #ENV jarPath=${JAR_FILE}
 
 # java,product environment and other
-ENV JAVA_CMD="/usr/bin/java -jar  -XX:-OmitStackTraceInFastThrow -Dserver.port=8080 -Dauthentication.enabled=true -Dauthorization.enabled.default=true ${JAR_FILE}  "
-ENV JAVA_CMD_PRO="/usr/bin/java  -jar  -XX:-OmitStackTraceInFastThrow  -Dserver.port=8080 -Dauthentication.enabled=true -Dauthorization.enabled.default=true  ${JAR_FILE}  "
+ENV JAVA_CMD="/usr/local/openjdk-8/bin/java -jar  -XX:-OmitStackTraceInFastThrow -Dserver.port=8080 -Dauthentication.enabled=true -Dauthorization.enabled.default=true ${JAR_FILE}  "
+ENV JAVA_CMD_PRO="/usr/local/openjdk-8/bin/java  -jar  -XX:-OmitStackTraceInFastThrow  -Dserver.port=8080 -Dauthentication.enabled=true -Dauthorization.enabled.default=true  ${JAR_FILE}  "
 
 ENTRYPOINT ["/tini", "--", "/bin/sh", "-c", "if [ ${SPRING_PROFILES_ACTIVE} = 'pro' ] ; then $JAVA_CMD_PRO ;else $JAVA_CMD ;fi"]
 
 
-#ENTRYPOINT ["/bin/sh", "-c", "/usr/bin/java -jar  $jarPath","" ]
