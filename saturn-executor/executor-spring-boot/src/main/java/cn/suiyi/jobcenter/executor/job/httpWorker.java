@@ -28,6 +28,8 @@ public class httpWorker extends AbstractSaturnJavaJob {
 
 
         log.info("{} is running,item is {}, Pars {}", jobName,shardItem, shardingContext.getJobParameter());
+
+        log.info("httpService {}", httpService);
         
         String[] kvs= StringUtils.split(shardingContext.getJobParameter(),",");
 
