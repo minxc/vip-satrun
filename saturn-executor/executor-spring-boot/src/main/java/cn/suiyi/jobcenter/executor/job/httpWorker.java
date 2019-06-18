@@ -26,8 +26,8 @@ public class httpWorker extends AbstractSaturnJavaJob {
     public SaturnJobReturn handleJavaJob(String jobName, Integer shardItem, String shardParam,
                                          SaturnJobExecutionContext shardingContext) throws InterruptedException {
 
-        log.info("{} is running, item is {}", jobName, shardItem);
-        log.info("{} is running, Pars {}", jobName, shardingContext.getJobParameter());
+
+        log.info("{} is running,item is {}, Pars {}", jobName,shardItem, shardingContext.getJobParameter());
         
         String[] kvs= StringUtils.split(shardingContext.getJobParameter(),",");
 
@@ -60,9 +60,13 @@ public class httpWorker extends AbstractSaturnJavaJob {
 
           String ret=   httpService.doing(map.get("url"),map.get("method"),map.get("body"));
 
+            log.info("{} 执行结果 {}", jobName, ret);
+
             return new SaturnJobReturn(0,ret,200);
         }
         catch (Exception ex){
+
+            log.error("{} 执行结果 {}", jobName, ex.getMessage());
             return  new SaturnJobReturn(2,ex.getMessage(),500);
         }
 
