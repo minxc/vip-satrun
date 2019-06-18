@@ -9,7 +9,7 @@ ARG JAR_FILE
 
 #COPY ${JAR_FILE}  .
 
-COPY src .
+COPY docker-allinone .
 
 
 

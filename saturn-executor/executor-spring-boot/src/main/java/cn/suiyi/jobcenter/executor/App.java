@@ -2,6 +2,7 @@ package cn.suiyi.jobcenter.executor;
 
 import com.vip.saturn.job.application.AbstractSaturnApplication;
 import com.vip.saturn.job.springboot.GenericSpringBootSaturnApplication;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
@@ -15,7 +16,7 @@ public class App  extends GenericSpringBootSaturnApplication {
 
     public static void main(String[] args)  {
         //  Thread.sleep(10*1000);
-      //  SpringApplication.run(App.class, args);
+       SpringApplication.run(App.class, args);
 
     }
 
