@@ -16,7 +16,7 @@ public class App  extends GenericSpringBootSaturnApplication {
 
     public static void main(String[] args)  {
         //  Thread.sleep(10*1000);
-       SpringApplication.run(App.class, args);
+      // SpringApplication.run(App.class, args);
 
     }
 

@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class httpService {
 
-    private static final Logger log = LoggerFactory.getLogger(httpService.class);
+    //private static final Logger log = LoggerFactory.getLogger(httpService.class);
 
-    public String doing(String url, String method, String body) throws Exception {
+    public String doing(String url, String method, String body,Logger log ) throws Exception {
         log.debug("httpService 参数 url={},methos={},body={}", url, method, body);
 
         OkHttpClient client = new OkHttpClient.Builder()
@@ -32,7 +32,7 @@ public class httpService {
             final Call call = client.newCall(request);
             Response response = call.execute();
             String ret = response.body().string();
-            log.debug("response={}", ret);
+            log.debug("get response={}", ret);
             return ret;
         }
         if (method.trim().equalsIgnoreCase("post")) {
@@ -49,7 +49,7 @@ public class httpService {
             final Call call = client.newCall(request);
             Response response = call.execute();
             String ret = response.body().string();
-            log.debug("response={}", ret);
+            log.debug("post response={}", ret);
             return ret;
         }
 

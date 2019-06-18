@@ -58,7 +58,7 @@ public class httpWorker extends AbstractSaturnJavaJob {
 
         try {
 
-          String ret=   httpService.doing(map.get("url"),map.get("method"),map.get("body"));
+          String ret=   httpService.doing(map.get("url"),map.get("method"),map.get("body"),log);
 
             log.info("{} 执行结果 {}", jobName, ret);
 
@@ -66,7 +66,7 @@ public class httpWorker extends AbstractSaturnJavaJob {
         }
         catch (Exception ex){
 
-            log.error("{} 执行结果 {}", jobName, ex.getMessage());
+            log.error("{} 执行报错 {}", jobName, ex.getMessage());
             return  new SaturnJobReturn(2,ex.getMessage(),500);
         }
 
