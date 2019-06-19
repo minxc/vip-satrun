@@ -2,49 +2,99 @@
 
 
 plugins {
-   id 'org.springframework.boot' version '2.1.4.RELEASE'
+
     id 'java'
+
+    id 'maven-publish'
 }
 apply plugin: 'idea'
 
 
-
-group = 'cn.suiyi.jobcenter.executor'
-version = '1.0.0'
-sourceCompatibility = 1.8
-
-apply plugin: 'io.spring.dependency-management'
-
 repositories {
-    mavenCentral()
-}
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+    mavenLocal()
+    maven {
+        url = 'http://sy-suz-srv73.suiyi.com.cn:8081/repository/shihang-public/'
+    }
+
+    maven {
+        url = 'http://repo.maven.apache.org/maven2'
     }
 }
 
+
+group = 'cn.suiyi.jobcenter.executor'
+version = '1.0'
+
+
+description = 'executor-boot'
+sourceCompatibility = '1.8'
+
+
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 dependencies {
-   implementation 'org.springframework.boot:spring-boot-starter-web'
-   compileOnly 'org.projectlombok:lombok'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.16.RELEASE'
+   // compileOnly 'org.projectlombok:lombok'
     //developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+   // annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+   // annotationProcessor 'org.projectlombok:lombok'
+   // testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.vip.saturn:saturn-springboot:3.3.1'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.2'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 
 }
-
+ext{
+    libname ="executor_1_0_lib";
+}
 task copyJar(type: Copy, dependsOn: 'clearJar') {
     from configurations.compileClasspath
-    into "$buildDir\\libs\\lib"
+    into "$buildDir\\libs\\$libname"
 }
 task clearJar(type: Delete) {
-    delete "$buildDir\\libs\\lib"
+    delete "$buildDir\\libs\\$libname"
     delete "$buildDir\\libs\\config"
 }
+
+jar {
+
+
+    manifestContentCharset 'utf-8'
+    metadataCharset 'utf-8'
+    manifest {  //incubating版本，以后版本可能会改API
+
+
+        attributes(
+                "Manifest-Version": 1.0,
+                "Main-Class": "cn.suiyi.jobcenter.executor.App" ,  //主函数的名称
+
+                'Class-Path': configurations.compileClasspath.files.collect { "$libname/$it.name" }.join(' ')
+        )
+
+    }
+
+
+    println "========="
+    println "========="
+    dependsOn clearJar
+    dependsOn copyJar
+
+}
+
 //jar {
 //
 //
@@ -70,27 +120,27 @@ task clearJar(type: Delete) {
 //}
 
 
-bootJar {
-    with copySpec {
-        from "$buildDir/classes/java/main/cn/suiyi/jobcenter/executor"
-        into 'cn/suiyi/jobcenter/executor'
-    }
-        manifestContentCharset 'utf-8'
-    metadataCharset 'utf-8'
-    manifest {  //incubating版本，以后版本可能会改API
-
-
-        attributes(
-                "Manifest-Version": 1.0,
-                "Main-Class": "cn.suiyi.jobcenter.executor.App" ,  //主函数的名称
-
-                'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
-        )
-
-    }
-
-
-    println "========="
-    dependsOn clearJar
-    dependsOn copyJar
-}
+//bootJar {
+//    with copySpec {
+//        from "$buildDir/classes/java/main/cn/suiyi/jobcenter/executor"
+//        into 'cn/suiyi/jobcenter/executor'
+//    }
+//    manifestContentCharset 'utf-8'
+//    metadataCharset 'utf-8'
+//    manifest {  //incubating版本，以后版本可能会改API
+//
+//
+//        attributes(
+//                "Manifest-Version": 1.0,
+//                "Main-Class": "cn.suiyi.jobcenter.executor.App" ,  //主函数的名称
+//
+//                'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
+//        )
+//
+//    }
+//
+//
+//    println "========="
+//    dependsOn clearJar
+//    dependsOn copyJar
+//}

@@ -19,8 +19,8 @@ public class httpWorker extends AbstractSaturnJavaJob {
 
     private static final Logger log = LoggerFactory.getLogger(httpWorker.class);
 
-    @Resource
-    private httpService httpService;
+//    @Resource
+//    private httpService httpService;
 
     @Override
     public SaturnJobReturn handleJavaJob(String jobName, Integer shardItem, String shardParam,
@@ -28,6 +28,8 @@ public class httpWorker extends AbstractSaturnJavaJob {
 
 
         log.info("{} is running,item is {}, Pars {}", jobName,shardItem, shardingContext.getJobParameter());
+
+        httpService httpService = new httpService();
 
         log.info("httpService {}", httpService);
         
